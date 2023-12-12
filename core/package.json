@@ -1,0 +1,29 @@
+{
+  "name": "@carefrees/simple-form-utils",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://sunlxy.github.io/carefrees-simple-form-utils",
+  "author": "SunLxy <1011771396@qq.com>",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsbb build",
+    "watch": "tsbb watch"
+  },
+  "dependencies": {
+    "@carefrees/simple-store-utils": "~0.0.14",
+    "async-validator": "~4.2.5"
+  },
+  "devDependencies": {
+    "@types/react": "~18.2.43",
+    "react": "~18.2.0"
+  }
+}
