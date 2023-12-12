@@ -41,14 +41,14 @@ export const useFormProps = (props: FormProps) => {
 
   /**提交*/
   const onChildSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    event?.preventDefault?.();
+    event?.stopPropagation?.();
     formInstance.submit()
   }
 
   return {
     ...props,
-    onChildSubmit,
+    onSubmit: onChildSubmit,
     columnNumber,
     children,
     labelMode,
