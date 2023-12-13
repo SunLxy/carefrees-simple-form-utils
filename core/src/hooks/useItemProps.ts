@@ -70,6 +70,7 @@ export const useItemProps = (props: FormItemProps) => {
   })
 
   return {
+    uid,
     content,
     rules: ruleConf,
     required,
