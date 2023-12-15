@@ -2,7 +2,7 @@
   "name": "@carefrees/simple-form-utils",
   "version": "0.0.16",
   "description": "",
-  "homepage": "https://sunlxy.github.io/carefrees-simple-form-utils",
+  "homepage": "https://github.com/SunLxy/carefrees-simple-form-utils",
   "author": "SunLxy <1011771396@qq.com>",
   "license": "ISC",
   "main": "lib/index.js",
