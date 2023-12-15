@@ -201,12 +201,11 @@ export class FormInstance<T = any> extends CSTU_Instance {
     return new Promise(async (resolve, reject) => {
       const errorFields: FromItemErrorListType[] = []
       const notErrorFields: FromItemErrorListType[] = []
-      const nameListPath = []
+      const nameListPath = this.componentList.map((item) => CSTU_toArray(item.path))
       const lg = this.validatorList.length;
       for (let index = 0; index < lg; index++) {
         const validator = this.validatorList[index];
         const errorName = CSTU_toArray(validator.name)
-        nameListPath.push(errorName)
         let isValidate = true
         if (Array.isArray(paths)) {
           /**判断是否存在当前需要验证的项*/
