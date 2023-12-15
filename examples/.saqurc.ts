@@ -5,10 +5,8 @@ export default () => defineConfig({
   output: {
     publicPath: './'
   },
-  builtins: {
-    minifyOptions: {
-      dropConsole: false
-    }
+  _JS_minifyOptions: {
+    dropConsole: false
   },
   module: {
     rules: [
