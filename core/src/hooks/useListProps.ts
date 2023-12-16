@@ -1,7 +1,7 @@
 import { useRef, useMemo, createElement } from "react"
 import { FormListProvider } from "."
 import { FormListProps } from "../interface"
-import { useRegister, useFormListName } from "."
+import { useRegisterFieldItem, useFormListName } from "."
 import { List } from "../useStore"
 
 /**处理list表单*/
@@ -11,7 +11,7 @@ export const useListProps = (props: FormListProps) => {
   /**唯一id*/
   const register_uid = useRef(Symbol(symbolId))
   /**实例*/
-  const instance = useRegister({ path: newName, uid: register_uid.current })
+  const instance = useRegisterFieldItem({ path: newName, uid: register_uid.current })
   /**List 实例*/
   const listInstance = useRef(new List()).current
 

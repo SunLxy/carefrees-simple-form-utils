@@ -2,7 +2,7 @@ import { Children, isValidElement, cloneElement, useRef } from "react"
 import { FormItemProps, } from "../interface"
 import { use_CSTU_Update } from "@carefrees/simple-store-utils"
 import { useRandomId } from "../utils/useRandomId"
-import { useRegister, useCommonAttributesContext, useFormListName } from "."
+import { useRegisterFieldItem, useCommonAttributesContext, useFormListName } from "."
 import { Rule } from "../useStore/rule"
 
 /**表单项处理参数*/
@@ -30,7 +30,7 @@ export const useItemProps = (props: FormItemProps) => {
   const register_uid = useRef(Symbol(symbolId))
   const uid = useRandomId(`${nameString}`)
   /**注册表单项*/
-  const instance = useRegister({ path: newName, uid: register_uid.current })
+  const instance = useRegisterFieldItem({ path: newName, uid: register_uid.current })
   /**获取值*/
   const value = instance.getValue(newName)
   /**输入框配置*/
