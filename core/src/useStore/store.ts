@@ -62,7 +62,7 @@ export class FormInstance<T = any> extends CSTU_Instance {
    * 注册 form item 
    * @param props 注册更新组件方法
    * */
-  private register = (props: FormItemRegisterProps) => {
+  private registerFieldItem = (props: FormItemRegisterProps) => {
     return this._create_CSTU_register(this.componentField, this.storeField, this.initialField, props)
   }
 
@@ -70,7 +70,7 @@ export class FormInstance<T = any> extends CSTU_Instance {
    * 注册值更新监听
    * @param props 监听方法
   */
-  private registerWatch = (props: FormRegisterWatchProps) => {
+  private registerFieldWatch = (props: FormRegisterWatchProps) => {
     return this._create_CSTU_registerWatch(this.watchField, props)
   }
 
@@ -273,8 +273,8 @@ export class FormInstance<T = any> extends CSTU_Instance {
   get instance_function() {
     return {
       init: this.init,
-      register: this.register,
-      registerWatch: this.registerWatch,
+      registerFieldItem: this.registerFieldItem,
+      registerFieldWatch: this.registerFieldWatch,
       updateValue: this.updateValue,
       bathUpdateValue: this.bathUpdateValue,
       notice: this.notice,

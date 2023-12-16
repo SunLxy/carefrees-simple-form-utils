@@ -46,13 +46,13 @@ export interface InstanceFunction {
   * 注册 form item 
   * @param props 注册更新组件方法
   * */
-  register: (props: FormItemRegisterProps) => () => void;
+  registerFieldItem: (props: FormItemRegisterProps) => () => void;
 
   /**
    * 注册值更新监听
    * @param props 监听方法
   */
-  registerWatch: (props: FormRegisterWatchProps) => () => void;
+  registerFieldWatch: (props: FormRegisterWatchProps) => () => void;
   /**
   * 注册 form item 验证规则
   * @param validator 参数
