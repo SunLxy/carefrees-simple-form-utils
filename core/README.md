@@ -54,7 +54,13 @@ $ npm install @carefrees/simple-form-utils # yarn add @carefrees/simple-form-uti
 
 ```tsx mdx:preview
 import React ,{ Fragment } from "react"
-import { FormProps, useFormProps, FormItemProps, useForm ,useItemProps, useItemErrors,FormItemErrorProps } from "@carefrees/simple-form-utils"
+import { 
+  FormProps, useFormProps, 
+  FormItemProps, useForm ,
+  useItemProps, useItemErrors,
+  FormItemErrorProps,
+  useListProps, FormListProps
+} from "@carefrees/simple-form-utils"
 
 const Form = (props: FormProps) => {
   const { content, children, onSubmit,...rest } = useFormProps(props)
@@ -70,17 +76,27 @@ const Form = (props: FormProps) => {
 const FormItemError = (props: FormItemErrorProps) => {
   const error = useItemErrors(props)
   console.log("错误信息====>",error)
-  return (Array.isArray(error) && !!error.length && <div >{error}</div> || <Fragment />)
+  return (Array.isArray(error) && !!error.length && <div  style={{ color: "red", boxSizing: "border-box" }} >{error}</div> || <Fragment />)
 }
 
 const Item = (props:FormItemProps)=>{
- const { content , rules , ...rest} = useItemProps(props)
+ const { content , rules ,label , ...rest} = useItemProps(props)
  console.log("Item====>",rest)
   /**简单化*/
   return (<div>
-    {content}
+    <div><span>{label}</span> {content} </div>
     <FormItemError rules={rules} />
   </div>)
+}
+
+export const FormList = (props: FormListProps) => {
+  const { className, style } = props
+  const children = useListProps(props)
+  return (
+    <div style={style} >
+      {children}
+    </div>
+  )
 }
 
 const Demo = ()=>{
@@ -101,6 +117,20 @@ const Demo = ()=>{
     <Item rules={[{ required: true, message: "必填项" }]} labelMode="left" label="成都洒出2" required name="点对点2">
       <input  />
     </Item>
+     <FormList name="aaa">
+        {({ fields, onAdd, onDelete }) => {
+          return <div style={{ border: "1px solid red", padding: 5, boxSizing: "border-box" }} >
+            {fields.map((item) => {
+              return <div style={{ border: "1px solid green", marginBottom: 5, padding: 5, boxSizing: "border-box" }} key={item.key}>
+                <button type="button" onClick={() => onDelete(item.name)} >删除</button>
+                <Item label={`标题${item.key}`} name={[item.name, "a"]} ><input style={{ width: "100%", boxSizing: "border-box" }} /></Item>
+              </div>
+            })}
+            <br />
+            <button type="button" onClick={() => onAdd({})} >添加</button>
+          </div>
+        }}
+      </FormList>
     <button type="submit" >提交</button>
   </Form>)
 }
