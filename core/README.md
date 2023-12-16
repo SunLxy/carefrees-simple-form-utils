@@ -23,8 +23,8 @@ $ npm install @carefrees/simple-form-utils # yarn add @carefrees/simple-form-uti
 1. `FormContext`:表单实例方法`Context`
 2. `FormProvider`:表单实例方法`Provider`
 3. `useFormContext`:获取表单实例方法
-4. `useRegister`:注册表单项
-5. `useRegisterWatch`:注册监听值变化
+4. `useRegisterItem`(或者使用`useRegister`):注册表单项
+5. `useRegisterFieldWatch`(或者使用`useRegisterWatch`):注册监听值变化
 6. `MultipleFormContext`:多表单实例方法`Context`
 7. `MultipleFormProvider`:多表单实例方法`Provider`
 8. `useMultipleFormContext`:获取多表单实例方法

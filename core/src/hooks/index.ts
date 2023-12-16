@@ -27,9 +27,11 @@ export const FormProvider = create_CSTU_InstanceProvider(useForm, FormContext)
 
 export const useFormContext = create_CSTU_hooks_InstanceContext(FormContext)
 
-export const useRegister = create_CSTU_hooks_InstanceItemRegister(FormContext, "register")
+export const useRegister = create_CSTU_hooks_InstanceItemRegister(FormContext, "registerField")
+export const useRegisterItem = useRegister
 
-export const useRegisterWatch = create_CSTU_hooks_InstanceFieldWatch("registerWatch")
+export const useRegisterWatch = create_CSTU_hooks_InstanceFieldWatch("registerFieldWatch")
+export const useRegisterFieldWatch = useRegisterWatch
 
 //===========================================================================================================
 
