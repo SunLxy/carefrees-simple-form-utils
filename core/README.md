@@ -53,8 +53,8 @@ $ npm install @carefrees/simple-form-utils # yarn add @carefrees/simple-form-uti
 ## 简单案例
 
 ```tsx mdx:preview
-import React from "react"
-import { FormProps, useFormProps, FormItemProps, useForm ,useItemProps } from "@carefrees/simple-form-utils"
+import React ,{ Fragment } from "react"
+import { FormProps, useFormProps, FormItemProps, useForm ,useItemProps, useItemErrors,FormItemErrorProps } from "@carefrees/simple-form-utils"
 
 const Form = (props: FormProps) => {
   const { content, children, onSubmit,...rest } = useFormProps(props)
@@ -67,11 +67,20 @@ const Form = (props: FormProps) => {
   )
 }
 
+const FormItemError = (props: FormItemErrorProps) => {
+  const error = useItemErrors(props)
+  console.log("错误信息====>",error)
+  return (Array.isArray(error) && !!error.length && <div >{error}</div> || <Fragment />)
+}
+
 const Item = (props:FormItemProps)=>{
- const { content ,...rest} = useItemProps(props)
+ const { content , rules , ...rest} = useItemProps(props)
  console.log("Item====>",rest)
   /**简单化*/
-  return content
+  return (<div>
+    {content}
+    <FormItemError rules={rules} />
+  </div>)
 }
 
 const Demo = ()=>{
@@ -87,6 +96,9 @@ const Demo = ()=>{
 
   return (<Form onFinish={onFinish} form={form} initialValues={{ 点对点1:"1"  }}  >
     <Item rules={[{ required: true, message: "必填项" }]} labelMode="left" label="成都洒出1" required name="点对点1">
+      <input  />
+    </Item>
+    <Item rules={[{ required: true, message: "必填项" }]} labelMode="left" label="成都洒出2" required name="点对点2">
       <input  />
     </Item>
     <button type="submit" >提交</button>
