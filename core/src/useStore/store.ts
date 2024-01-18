@@ -207,7 +207,7 @@ export class FormInstance<T = any> extends CSTU_Instance {
         const validator = this.validatorList[index];
         const errorName = CSTU_toArray(validator.name)
         let isValidate = true
-        if (Array.isArray(paths)) {
+        if (Array.isArray(paths) && paths.length) {
           /**判断是否存在当前需要验证的项*/
           const findx = paths.find((itk) => CSTU_getFormatPath(itk) === CSTU_getFormatPath(validator.name))
           if (!findx) {

@@ -33,35 +33,51 @@ export class MultipleFormInstance {
 
   /**
    * 验证表单规则
-   * @param name 表单名称(如果不传递表单名称,则验证所有表单)
+   * @param namePath 表单名称(如果不传递表单名称,则验证所有表单)
+   * 
+   * @example
+   * ```ts
+   * // 第一种
+   * const result = await validate()
+   * 
+   * // 第二种
+   * const result = await validate(['表单一','表单二'])
+   * 
+   * // 第三种
+   * const result = await validate({ 表单一:["字段一","字段二"] ,表单二:["字段一","字段二"] })
+   * 
+   * 
+   * ```
+   * 
   */
-  validate = async (name?: string) => {
+  validate = async (namePath?: string | string[] | Record<string, string[]>) => {
     const listFormErrors: Record<string, ValidateErrorEntity> = {}
     let isSuccess = true
-    if (name) {
-      const form = this.instanceMap.get(name)
-      if (form) {
-        try {
-          const result = await form.validate()
-          listFormErrors[name] = { errorFields: [], values: result }
-        } catch (errs) {
-          isSuccess = false
-          listFormErrors[name] = errs
-        }
+    let nameKeys = [];
+    let isObject = false
+    if (namePath) {
+      if (Array.isArray(namePath)) {
+        nameKeys = namePath;
+      } else if (Object.prototype.toString.call(namePath) === '[object Object]') {
+        isObject = true
+        nameKeys = Object.keys(namePath)
+      } else {
+        nameKeys = [namePath]
       }
     } else {
-      const nameKeys = Array.from(this.instanceMap.keys());
-      const lg = nameKeys.length
-      for (let index = 0; index < lg; index++) {
-        const name = nameKeys[index];
-        const form = this.instanceMap.get(name)
-        try {
-          const result = await form.validate()
-          listFormErrors[name] = { errorFields: [], values: result }
-        } catch (errs) {
-          isSuccess = false
-          listFormErrors[name] = errs
-        }
+      nameKeys = Array.from(this.instanceMap.keys());
+    }
+    const lg = nameKeys.length
+    for (let index = 0; index < lg; index++) {
+      const name = nameKeys[index];
+      const form = this.instanceMap.get(name)
+      try {
+        const paths = isObject ? namePath[name] : undefined
+        const result = await form.validate(paths)
+        listFormErrors[name] = { errorFields: [], values: result }
+      } catch (errs) {
+        isSuccess = false
+        listFormErrors[name] = errs
       }
     }
     /**成功抛出数据*/

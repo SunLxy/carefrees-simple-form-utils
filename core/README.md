@@ -375,7 +375,7 @@ export interface InstanceFunction {
    * 验证表单规则
    * @param paths 字段路径(如果不传递字段路径,则验证所有)
   */
-  validate: () => Promise<ValidateErrorEntity | any>
+  validate: (paths?: CSTU_PathTypes[]) => Promise<ValidateErrorEntity | any>
   /**
    * 提交
   */
@@ -513,9 +513,22 @@ export declare class MultipleFormInstance {
     getFormInstances: (name?: string) => InstanceFunction | Map<string, InstanceFunction>;
     /**
      * 验证表单规则
-     * @param name 表单名称(如果不传递表单名称,则验证所有表单)
+     * @param namePath 表单名称(如果不传递表单名称,则验证所有表单)
+     * 
+     * @example
+     * ```ts
+     * // 第一种
+     * const result = await validate()
+     * 
+     * // 第二种
+     * const result = await validate(['表单一','表单二'])
+     * 
+     * // 第三种
+     * const result = await validate({ 表单一:["字段一","字段二"] ,表单二:["字段一","字段二"] })
+     * ```
+     * 
     */
-    validate: (name?: string) => Promise<Record<string, ValidateErrorEntity<any>>>;
+    validate = (namePath?: string | string[] | Record<string, string[]>) => Promise<Record<string, ValidateErrorEntity<any>>>
     /**
      * 获取表单中值
      * @param name 表单名称 (不存在时，获取所有表单值)

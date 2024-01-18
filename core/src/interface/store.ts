@@ -89,7 +89,7 @@ export interface InstanceFunction {
    * 验证表单规则
    * @param paths 字段路径(如果不传递字段路径,则验证所有)
   */
-  validate: () => Promise<ValidateErrorEntity | any>
+  validate: (paths?: CSTU_PathTypes[]) => Promise<ValidateErrorEntity | any>
   /**
    * 提交
   */
