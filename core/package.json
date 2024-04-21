@@ -19,7 +19,7 @@
     "watch": "tsbb watch"
   },
   "dependencies": {
-    "@carefrees/simple-store-utils": "~0.0.14",
+    "@carefrees/simple-store-utils": "~0.0.18",
     "async-validator": "~4.2.5"
   },
   "devDependencies": {
